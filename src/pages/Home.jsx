@@ -3,7 +3,17 @@ import { FaAnglesDown } from "react-icons/fa6";
 import { motion } from 'framer-motion';
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [showHeroBottom, setShowHeroBottom] = useState(false);
+
+  // Timeout to hide loading screen after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Check scroll position to reveal hero bottom section
   useEffect(() => {
@@ -28,8 +38,16 @@ const Home = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-circle"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="hero text-black">
+    <div className="hero  text-black">
       {/* Hero Top */}
       <div className="hero-top text-center my-10">
         <motion.h1
@@ -57,9 +75,9 @@ const Home = () => {
           {/* Left Section */}
           <motion.div
             className="left flex flex-col items-center sm:items-start text-center sm:text-left w-full sm:w-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            initial={{ x: '-100%', opacity: 0 }}
+            animate={{ x: showHeroBottom ? 0 : '-100%', opacity: showHeroBottom ? 1 : 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
             <h1 className="text-xl sm:text-6xl mb-4">Let's Talk</h1>
             <a
@@ -79,9 +97,9 @@ const Home = () => {
           {/* Right Section */}
           <motion.div
             className="right flex-1 sm:text-lg text-gray-800 w-full sm:w-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2 }}
+            initial={{ x: '100%', opacity: 0 }}
+            animate={{ x: showHeroBottom ? 0 : '100%', opacity: showHeroBottom ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
           >
             <p className="text-lg sm:text-xl leading-relaxed">
               <span className='text-4xl'>Hello</span>, I’m <span className='text-4xl'>Huseyn Khalil</span>, a junior front-end developer based in Baku, Azerbaijan.<br />

@@ -8,7 +8,7 @@ function Header() {
     // Show header after 3 seconds
     const timer = setTimeout(() => {
       setShowHeader(true);
-    }, 3000);
+    }, 0);
 
     // Clean up timer if the component unmounts
     return () => clearTimeout(timer);
@@ -30,9 +30,11 @@ function Header() {
   return (
     showHeader && (
       <div
-        className={`header flex shadow-2xl flex-row rounded-[200px] text-white px-1 py-1 fixed bg-black w-fit sm:w-min items-center transition-all ease-in-out duration-500 gap-4 ${
+      
+        className={`header z-10 flex shadow-2xl flex-row rounded-[200px] text-white px-1 py-1 fixed bg-black w-fit sm:w-min items-center transition-all ease-in-out duration-500 gap-4 ${
           scrolled ? 'top-4' : 'top-28'
         }`}
+        
         style={{
           left: '50%',
           transform: 'translateX(-50%)',
@@ -46,7 +48,7 @@ function Header() {
         </a>
         <a
           className="bg-black rounded-[200px] text-white hover:bg-white hover:text-black px-6 py-2 text-xl sm:text-4xl transition-all ease-in-out duration-200"
-          href="/projects"
+          href="/project"
         >
           Projects
         </a>

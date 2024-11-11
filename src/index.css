@@ -30,3 +30,18 @@
   height: 100vh;
   background-color: #e7e7e9;
 }
+/* Add this in your CSS or directly inline with Tailwind if you prefer */
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.scroll-animation {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 12s linear infinite;
+}
